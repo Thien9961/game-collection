@@ -1,3 +1,4 @@
+using Game3;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -81,10 +82,11 @@ public class Controller : MonoBehaviour
     {
 
         RaycastHit hitGnd, hitTarget;
+        bool detectTarget;
         Vector3 origin = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         bool detectGnd = Physics.Raycast(new Ray(origin, Vector3.down), out hitGnd, 1);
         UnityEngine.Debug.DrawRay(origin, Vector3.down, Color.green);
-        bool detectTarget = Physics.Raycast(new Ray(transform.position, transform.forward), out hitTarget, attackRange);
+        detectTarget = Physics.Raycast(new Ray(transform.position, transform.forward), out hitTarget, attackRange, (int)faction.WARRIOR);
         if (detectTarget)
             attack(ref isAttacking, hitTarget.collider.gameObject);
         else

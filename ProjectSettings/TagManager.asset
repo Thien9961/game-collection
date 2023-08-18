@@ -11,10 +11,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Projectile
+  - Faction 0
   - Water
   - UI
-  - 
+  - Faction 1
   - 
   - 
   - 
