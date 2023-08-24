@@ -14,5 +14,7 @@ public class Bullet : Projectile
             if (hit.collider.gameObject.GetComponent<Lifeform>() != null)
                 hit.collider.GetComponent<Lifeform>().takedamage(gameObject, damage, impactforce);
         Destroy(gameObject);
+        playSfx(onHitSfx);
+        playSfx(onDestroySfx);
     }
 }

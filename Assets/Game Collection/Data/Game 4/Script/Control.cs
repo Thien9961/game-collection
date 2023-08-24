@@ -8,7 +8,6 @@ using UnityEngine;
 public class Control : MonoBehaviour
 {
     public float sensivity = 200;
-
     private void OnMouseOver()
     {
 
@@ -40,7 +39,7 @@ public class Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            
+
     }
 
     // Update is called once per frame

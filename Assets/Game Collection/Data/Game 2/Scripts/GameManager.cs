@@ -12,55 +12,31 @@ namespace Game2
 {
     public class GameManager : MonoBehaviour
     {
-        public int fps;
+        public int fps,DefaulWpnIndex=0;
         public bool isplaying;
-        public float score,gameTime=180,energyCap=100,duration=10f;
-        public TextMeshProUGUI scoreTxt,ammoTxt;
+        public float score = 0;
+        public float gameTime=180;
+        public TextMeshProUGUI scoreTxt;
         public GameObject restartmenu,pausemenu;
-        public List<GameObject> weapon;
-        public UnityEngine.UI.Slider time,energy,progess;
-
-        Game2.Player playerScript;
-        Wpn wpnScript;
+        public UnityEngine.UI.Slider time;
+        public GameObject player;
+        public GameObject[] Weapons;
         // Start is called before the first frame update
-        private void energyManager()
-        {
-            GameObject wpnCurrent=playerScript.getwpn(weapon) ;
-            if (energy.value >= energyCap && wpnCurrent.name == weapon[0].name)
-            {
-                Destroy(wpnCurrent);
-                player_givewpn(GameObject.Find("Player"), weapon[UnityEngine.Random.Range(1, weapon.Count)]);
-            }
-            else if (wpnCurrent.name != weapon[0].name && energy.value > 0)
-                energy.value -= energyCap/duration/(1/Time.deltaTime);
-            else if (wpnCurrent.name != weapon[0].name)
-            {
-                Destroy(wpnCurrent);
-                player_givewpn(GameObject.Find("Player"), weapon[0]);
-            }
-
-        }
-        public void player_givewpn(GameObject whichuser, GameObject whichwpn)
-        {
-            GameObject newwpn = Instantiate(whichwpn, whichwpn.transform.position, whichuser.transform.rotation);
-            wpnScript=newwpn.GetComponent<Wpn>();
-            newwpn.transform.parent = whichuser.transform;
-            newwpn.name=whichwpn.name;
-            newwpn.SetActive(true);
-        }
-        public void gameResume()
+        public void Resume()
         {
             isplaying = true;
             pausemenu.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        public void gamePause()
+        public void PauseGame()
         {
             pausemenu.SetActive(true);
             isplaying = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
-        public void gameRestart()
+        public void RestartGame()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);           
         }
@@ -69,18 +45,17 @@ namespace Game2
             fps = (int)(1 / Time.deltaTime);
             isplaying = true;
             time.value = gameTime * fps ;
-            energy.value= 0;
-            energy.maxValue = energyCap;
             score = 0;
-            playerScript=GameObject.Find("Player").GetComponent<Game2.Player>();
-            player_givewpn(GameObject.Find("Player"),weapon[0]);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            player = Instantiate(player);
+            player.GetComponent<Player>().gmScript=GetComponent<Game2.GameManager>();
+            player.GetComponent<Player>().SetWpn(Weapons[DefaulWpnIndex]);
+            GameObject.Find("Camera").transform.parent= player.transform;
         }
         void hud_update()
         {
             scoreTxt.SetText("Score: " + score);
-            ammoTxt.SetText(wpnScript.ammoClip+"/"+wpnScript.ammoClipMax);
             if (time.value > 0 && isplaying)
                 time.value -= Time.deltaTime;
             else if(time.value>0)
@@ -101,10 +76,8 @@ namespace Game2
         void Update()
         {
             hud_update();
-            energyManager();
             if (Input.GetKeyDown(KeyCode.Escape))
-                gamePause(); 
-            
+                PauseGame(); 
         }
     }
 }

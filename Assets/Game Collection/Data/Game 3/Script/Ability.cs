@@ -9,6 +9,7 @@ using static UnityEngine.Rendering.DebugUI;
     public KeyCode key;
     public static readonly int PRESS=0,HOLD=1,RELEASE=2,ON=3,OFF=4;
     public bool isready=true;
+    public AudioClip onCastSfx=null;
     protected virtual void reset()
     {
         isready = true;
@@ -65,5 +66,6 @@ using static UnityEngine.Rendering.DebugUI;
     public virtual void start()
     {
         Debug.Log("Ability start");
+        GetComponent<AudioSource>().PlayOneShot(onCastSfx);
     }
 }

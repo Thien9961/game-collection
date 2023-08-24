@@ -31,7 +31,6 @@ public class Character : Lifeform
         animator.Play("Die");
         manager.isplaying = false;
         manager.menuRestart.SetActive(true);
-        manager.buttonPause.SetActive(false);
     }
     // Update is called once per frame
     protected override void Update()

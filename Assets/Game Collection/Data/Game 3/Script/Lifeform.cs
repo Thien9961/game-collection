@@ -13,6 +13,7 @@ public class Lifeform:MonoBehaviour
     public Rigidbody rb;
     public int state;
     public Animator animator=null;
+    public AudioClip onDeathSfx, onHurtSfx;
     public static readonly int STATE_NORMAL=0, STATE_STUNNED = 1, STATE_DEATH=2;
 
     protected Game3.GameManager manager;
@@ -36,6 +37,7 @@ public class Lifeform:MonoBehaviour
         rb=GetComponent<Rigidbody>();
         rb.AddForce(force, ForceMode.Impulse);
         hp.value -= damage;
+        GetComponent<AudioSource>().PlayOneShot(onHurtSfx);
     }
     protected virtual void stunned()
     {
@@ -50,6 +52,10 @@ public class Lifeform:MonoBehaviour
     protected virtual void death()
     {
         Destroy(gameObject);
+        GameObject au = new GameObject();
+        au.transform.position = transform.position;
+        au.AddComponent<AudioSource>();
+        au.GetComponent<AudioSource>().PlayOneShot(onDeathSfx);
     }
     public void stateUpdate()
     {

@@ -19,17 +19,23 @@ namespace Game3
         public bool isplaying;
         public List<UnityEngine.UI.Button> buff;
         public  int diffBase=0, diffIncr=3;
-        public GameObject menuPause, menuRestart, buttonPause,menuBuff,player;
+        public GameObject menuPause, menuRestart,menuBuff,player;
         public TextMeshProUGUI txtWave, txtEnemy;
         public Bounds worldbound;
 
         // Start is called before the first frame update
+        public void Exit()
+        {
+            SceneManager.LoadScene(0);
+        }
         public void gameResume()
         {
             isplaying = true;
             menuPause.SetActive(false);
-            menuBuff.SetActive(false);
-            buttonPause.SetActive(true);
+        }
+        public void gamePause()
+        {
+            isplaying = false;
         }
         public void gameRestart()
         {

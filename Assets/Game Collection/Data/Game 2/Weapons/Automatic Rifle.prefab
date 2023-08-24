@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3178327451986264168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3312034387879083866}
+  - component: {fileID: 236121206801519445}
+  m_Layer: 0
+  m_Name: Automatic Rifle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3312034387879083866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3178327451986264168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &236121206801519445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3178327451986264168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d410ebc1c1f8c7e45b6eebe30398c726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: 323
+  reload: 114
+  fullauto: 1
+  clipMax: 50
+  clip: 50
+  reloadTime: 2.5
+  accuracy: 1
+  cooldown: 0.095
+  launchForce: 100
+  ammunition: {fileID: 8308622595368910906, guid: 3c1225a586b9cee4b9531d1c6d0c4804,
+    type: 3}
+  muzzleflash: {fileID: 3456920365558831988, guid: 07965c59137b21c429eacfa08c2aa0f2,
+    type: 3}
+  firingSfx: {fileID: 8300000, guid: fecc3e7a0166a104cb810435f6fdf37b, type: 3}
+  reloadingSfx: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}

@@ -9,15 +9,33 @@ namespace Game2
         public List<GameObject> target;
         private float force;
         public float spawnInterval=1.5f;
+        public Vector3 spawnArea;
 
+        Bounds bounds;
         Game2.GameManager gmScript;
-        void targetSpawn()
+        static public Vector3 RandomPointInBounds(Bounds b)
         {
+            Vector3 v = new Vector3();
+            v.x=Random.Range(b.min.x, b.max.x);
+            v.y=Random.Range(b.min.y, b.max.y);
+            v.z=Random.Range(b.min.z, b.max.z);
+            return v;
+        }
+        void Spawn()
+        {
+            
             if (gmScript.isplaying)
-            {   
-                int r = Random.Range(0, target.Count);
-                Vector3 pos = new Vector3(Random.Range(-20, 20), target[r].transform.position.y, Random.Range(25, 45));
-                Rigidbody rb = Instantiate(target[r], pos, Random.rotation).GetComponent<Rigidbody>();
+            {
+                float a = 0, r = Random.Range(0f, 100f); 
+                int b=-1;
+                do
+                {
+                    b++;
+                    a += target[b].GetComponent<Target>().spawnChance;
+                }
+                while (a < r);
+                Vector3 pos = Game2.Spawner.RandomPointInBounds(bounds);
+                Rigidbody rb = Instantiate(target[b], pos, Random.rotation).GetComponent<Rigidbody>();
                 rb.AddForce(Vector3.up * force, ForceMode.Impulse);   
             }
         }
@@ -26,7 +44,11 @@ namespace Game2
         {
             force = Random.Range(15.0f, 20.0f);
             gmScript = GameObject.Find("Game Manager").GetComponent<Game2.GameManager>();
-            InvokeRepeating("targetSpawn", 0, spawnInterval);
+            InvokeRepeating("Spawn", 1, spawnInterval);
+            Vector3 v = new Vector3(spawnArea.x * transform.parent.localScale.x, spawnArea.y * transform.parent.localScale.y, spawnArea.z * transform.parent.localScale.z);
+            spawnArea = v;
+            bounds=new Bounds(transform.position, spawnArea);
+            transform.localScale=new Vector3(bounds.size.x/ transform.parent.localScale.x, bounds.size.y/ transform.parent.localScale.y, bounds.size.z/ transform.parent.localScale.z);
         }
 
         // Update is called once per frame

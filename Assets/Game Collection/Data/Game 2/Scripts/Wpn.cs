@@ -3,32 +3,24 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Game2;
-
+using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 public class Wpn : MonoBehaviour
 {
+    public KeyCode trigger = KeyCode.Mouse0,reload = KeyCode.R;
     public bool fullauto;
-    public int ammoClipMax, ammoClip;
-    public float reloadTime, accuracy , cooldown ,damage ;
-    public GameObject ammo,muzzle,facing;
+    public int clipMax, clip;
+    public float reloadTime, accuracy, cooldown,launchForce = 100;
+    public GameObject ammunition;
+    static public GameObject muzzle;
     public ParticleSystem muzzleflash;
-    GameObject crosshair;
-    AudioSource[] sfx;
-    Game2.GameManager gmScript;
-    
-
+    public AudioClip firingSfx, reloadingSfx;
+    static public TextMeshProUGUI ammoTxt;
     bool isready=true;
-    // Start is called before the first frame update
-    public void give(GameObject whichuser)
-    {
-        GameObject userhand;
-        for(int i =0;i< whichuser.transform.childCount;i++)
-            if(whichuser.transform.GetChild(i).name=="Hand")
-            {
-                userhand = whichuser.transform.GetChild(i).gameObject;
-                Instantiate(gameObject, userhand.transform.position, transform.rotation);
-                break;
-            }
-    }
+    bool isreloading = false;
+    // Start is called before the first frame update 
+
+    
     IEnumerator firing(float sec)
     {
         yield return new WaitForSeconds(sec);
@@ -39,71 +31,58 @@ public class Wpn : MonoBehaviour
     {
         
         yield return new WaitForSeconds(sec);
-        isready = true;  
+        isready = true;
     }
     void wpn_fire()
     {
-        if (isready && ammoClip>0)
+        if (isready && clip>0)
         {
+            GetComponent<AudioSource>().PlayOneShot(firingSfx);
             GameObject user=transform.parent.gameObject;
-            ammoClip--;
+            clip--;
             isready = false;
             Instantiate(muzzleflash, muzzle.transform.position, muzzleflash.transform.rotation).Play();
             StartCoroutine(firing(cooldown));
-            Rigidbody ammorb = Instantiate(ammo, muzzle.transform.position, ammo.transform.rotation).GetComponent<Rigidbody>();
-            ammorb.AddForce((facing.transform.position-transform.position).normalized * 100f, ForceMode.Impulse);
+            Instantiate(ammunition, muzzle.transform.position, ammunition.transform.rotation).GetComponent<Rigidbody>().AddForce(transform.parent.forward * launchForce, ForceMode.Impulse);
+            transform.parent.GetComponent<Animator>().Play("Shoot_SingleShot_AR");
         }
     }
 
     void wpn_reload()
     {
-        if (ammoClip < ammoClipMax && isready)
-        {
-            isready = false;
-            gmScript.progess.value = 0;
-            gmScript.progess.gameObject.SetActive(true);
-            StartCoroutine(reloading(reloadTime));
-            while (ammoClip < ammoClipMax) 
-                ammoClip++;
-        }
+        transform.parent.GetComponent<Animator>().Play("Reload");
+        GetComponent<AudioSource>().PlayOneShot(reloadingSfx);
+        isready = false;
+        isreloading=true;
+        StartCoroutine(reloading(reloadTime));
+        while (clip < clipMax) 
+            clip++;
     }
+
     void Start()
     {
-
-        gmScript=GameObject.Find("Game Manager").GetComponent<Game2.GameManager>();
-        gmScript.progess.maxValue = 1;
-        gmScript.progess.value = gmScript.progess.maxValue;
-        sfx =GetComponents<AudioSource>();
+        ammoTxt=GameObject.Find("Canvas").transform.Find("Ammo Text").GetComponent<TextMeshProUGUI>();
+        muzzle = transform.Find("Muzzle").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gmScript.isplaying)
+        ammoTxt.SetText(clip + "/" + clipMax);
+        
+        if (GameObject.Find("Game Manager").GetComponent<Game2.GameManager>().isplaying)
         {
-            switch (fullauto)
+            if (!fullauto)
             {
-                case false:
-                    {
-                        if (Input.GetKeyDown(KeyCode.Mouse0))
-                            wpn_fire();
-                    }
-                    break;
-                default:
-                    {
-                        if (Input.GetAxisRaw("Fire1") == 1)
-                            wpn_fire();
-                    }
-                    break;
+                if (Input.GetKeyDown(trigger))
+                    wpn_fire();
             }
-            if (Input.GetKeyDown(KeyCode.R))
-                wpn_reload();
-        }
-        if(gmScript.progess.gameObject.activeSelf)
-            if (gmScript.progess.value < 1)
-                gmScript.progess.value += Time.deltaTime/reloadTime;
-            else
-                gmScript.progess.gameObject.SetActive(false);
+            else 
+                if (Input.GetKey(trigger))
+                    wpn_fire();
+        }  
+        if (Input.GetKeyDown(reload))
+            wpn_reload();
     }
 }
 

@@ -17,8 +17,17 @@ public class Projectile : MonoBehaviour
     public Rigidbody rb;
     public allowedTarget allowedTarget;
     public bool OnImpactDestroy;
+    public AudioClip onDestroySfx, onHitSfx;
 
     Game3.GameManager manager;
+
+    protected void playSfx(AudioClip whichclip)
+    {
+        GameObject au = new GameObject();
+        au.transform.position = transform.position;
+        au.AddComponent<AudioSource>();
+        au.GetComponent<AudioSource>().PlayOneShot(whichclip);   
+    }
     protected virtual void OnTriggerEnter(Collider collider)
     {
         Lifeform victim = collider.GetComponent<Lifeform>();
@@ -30,10 +39,15 @@ public class Projectile : MonoBehaviour
                     {
                         if (victim.Faction == Faction )
                         {
-                            Debug.Log(collider.name + " was hit by" + gameObject.name);
+                            Debug.Log(collider.name + " was hit by" + gameObject.name);  
                             victim.takedamage(gameObject, damage, Vector3.zero);
+                            playSfx(onHitSfx);
                             if (OnImpactDestroy)
+                            {
                                 Destroy(gameObject);
+                                playSfx(onDestroySfx);
+                            }
+                                
                         }
                         break;
 
@@ -44,8 +58,12 @@ public class Projectile : MonoBehaviour
                         {
                             Debug.Log(collider.name + " was hit by" + gameObject.name);
                             victim.takedamage(gameObject, damage, Vector3.zero);
+                            playSfx(onHitSfx);
                             if (OnImpactDestroy)
+                            {
                                 Destroy(gameObject);
+                                playSfx(onDestroySfx);
+                            }
                         }
                         break;
                     }
@@ -55,8 +73,12 @@ public class Projectile : MonoBehaviour
                         {
                             Debug.Log(collider.name + " was hit by" + gameObject.name);
                             victim.takedamage(gameObject, damage, Vector3.zero);
+                            playSfx(onHitSfx);
                             if (OnImpactDestroy)
+                            {
                                 Destroy(gameObject);
+                                playSfx(onDestroySfx);
+                            }
                         }
                         break;
                     }

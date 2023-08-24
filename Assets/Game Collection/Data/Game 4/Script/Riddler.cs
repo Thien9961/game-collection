@@ -14,7 +14,12 @@ public class Riddler : MonoBehaviour
     public float time=2f;
     GameObject puzzle,solution;
     public GameObject observeMenu, resultMenu,solveMenu;
+    public AudioClip win, lose;
 
+    public void Exit()
+    {
+        SceneManager.LoadScene(0);
+    }
     public void Action()
     {
         if (phase < 5)
@@ -46,7 +51,12 @@ public class Riddler : MonoBehaviour
             case 3:
                 {
                     if (Puzzle.Compare(puzzle, solution))
+                    {
                         resultMenu.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Correct!");
+                        GetComponent<AudioSource>().PlayOneShot(win);
+                    }
+                    else
+                        GetComponent<AudioSource>().PlayOneShot(lose);
                     resultMenu.SetActive(true);
                     solveMenu.SetActive(false);
                     solution.GetComponent<Puzzle>().ReadOnly = true;

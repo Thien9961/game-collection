@@ -2,45 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game2;
+using static UnityEditor.Searcher.Searcher.AnalyticsEvent;
 
 public class Target : MonoBehaviour
 {
-    public float pts = 1f,hp = 1f,timebonus=0f,energybonus=0f;
-    public ParticleSystem exp;
-    public AudioClip clip;
-    Game2.GameManager gmScript;
-    private Color colorBase;
+    public float hp = 1f,spawnChance=100;
+    public ParticleSystem onDeathVfx;
+    public AudioClip onDamagedSfx,onDeathSfx;
+    Effect effect;
 
     // Start is called before the first frame update
-    private void recover()
+    void playSfx(AudioClip whichclip)
     {
-        GetComponent<Renderer>().material.color = colorBase;
+        if(whichclip != null)
+        {
+            GameObject au = new GameObject();
+            au.transform.position = transform.position;
+            au.AddComponent<AudioSource>();
+            au.AddComponent<Cleaner>();
+            au.GetComponent<AudioSource>().PlayOneShot(whichclip);
+        } 
     }
-    public void takedmg(float damage)
+
+    public void TakeDamage()
     {
-        hp -= damage;
-        AudioSource.PlayClipAtPoint(clip, transform.position);
-        GetComponent<Renderer>().material.color = Color.red;
-        Invoke(nameof(recover), 0.2f);
+        GetComponent<AudioSource>().PlayOneShot(onDamagedSfx);
+        effect.RegisterEvent(Event.TAKE_DAMAGE);
     }
     void Start()
     {
-        colorBase = GetComponent<Renderer>().material.color;
-        gmScript =GameObject.Find("Game Manager").GetComponent<Game2.GameManager>();
+        effect=GetComponent<Effect>();
     }
 
+    void death()
+    {
+        effect.RegisterEvent(Event.DEATH);
+        playSfx(onDeathSfx);
+        Destroy(gameObject);
+    }
     // Update is called once per frame
     void Update()
     {
         if (transform.position.y < -10)
             Destroy(gameObject);
         if (!(hp > 0))
-        {
-            Instantiate(exp, transform.position,exp.transform.rotation).Play(); 
-            gmScript.score+=pts;
-            gmScript.time.value += timebonus*gmScript.fps;
-            gmScript.energy.value += energybonus;
-            Destroy(gameObject);
-        }
+            death();
     }
 }

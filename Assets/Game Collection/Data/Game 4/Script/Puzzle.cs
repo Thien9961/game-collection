@@ -83,6 +83,7 @@ public class Puzzle : MonoBehaviour
         {
             script.data[v.x, v.y, v.z] = whichcolor;
             whichblock.GetComponent<Renderer>().material.color = whichcolor;
+            whichblock.GetComponent<AudioSource>().Play();
             for (int i = 0; i < Puzzle.color.Length; i++)
                 if (Puzzle.color[i] == script.data[v.x, v.y, v.z])
                 {
@@ -165,7 +166,6 @@ public class Puzzle : MonoBehaviour
         unitX=block.transform.localScale.x*Vector3.right;
         unitY=block.transform.localScale.y*Vector3.up;
         unitZ=block.transform.localScale.z * Vector3.forward;
-        
     }
 
     // Update is called once per frame
