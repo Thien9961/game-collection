@@ -34,20 +34,24 @@ public class Target : MonoBehaviour
     void Start()
     {
         effect=GetComponent<Effect>();
+        
     }
 
     void death()
     {
         effect.RegisterEvent(Event.DEATH);
         playSfx(onDeathSfx);
-        onDeathVfx.startColor = vfxColor;
-        onDeathVfx.transform.localScale = transform.localScale;
-        foreach(Transform t in onDeathVfx.transform)
+        if(onDeathVfx!=null)
         {
-            t.GetComponent<ParticleSystem>().startColor = vfxColor;
-            t.localScale= transform.localScale;
-        } 
-        Instantiate(onDeathVfx, transform.position, onDeathVfx.transform.rotation);
+            onDeathVfx.startColor = vfxColor;
+            onDeathVfx.transform.localScale = transform.localScale;
+            Instantiate(onDeathVfx, transform.position, onDeathVfx.transform.rotation).Play(true);
+            foreach (Transform t in onDeathVfx.transform)
+            {
+                t.GetComponent<ParticleSystem>().startColor = vfxColor;
+                t.localScale = transform.localScale;
+            }
+        }    
         Destroy(gameObject);  
     }
     // Update is called once per frame

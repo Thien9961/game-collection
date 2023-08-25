@@ -59,7 +59,7 @@ namespace Game2
             a[2] = weapon1.clipMax == weapon2.clipMax;
             a[3] = weapon1.firingSfx == weapon2.firingSfx;
             a[4] = weapon1.launchForce == weapon2.launchForce;
-            a[5] = weapon1.muzzleflash == weapon2.muzzleflash;
+            a[5] = true;
             a[6] = weapon1.ammunition == weapon2.ammunition;
             a[7] = weapon1.accuracy == weapon2.accuracy;
             a[8] = weapon1.reloadingSfx == weapon2.reloadingSfx;
@@ -76,6 +76,7 @@ namespace Game2
         {
             Game2.Player player = GetComponent<Player>();
             GameObject[] list = gmScript.Weapons;
+            Debug.Log("Energy: "+energy.value);
             if (HasWeapon(gmScript.Weapons[gmScript.DefaulWpnIndex].GetComponent<Wpn>()))
                 if (energy.value >= energy.maxValue)
                 {

@@ -55,7 +55,7 @@ MonoBehaviour:
   launchForce: 100
   ammunition: {fileID: 8308622595368910906, guid: 3c1225a586b9cee4b9531d1c6d0c4804,
     type: 3}
-  muzzleflash: {fileID: 3456920365558831988, guid: 07965c59137b21c429eacfa08c2aa0f2,
+  muzzleflash: {fileID: 7095843453894283377, guid: 07965c59137b21c429eacfa08c2aa0f2,
     type: 3}
   firingSfx: {fileID: 8300000, guid: fecc3e7a0166a104cb810435f6fdf37b, type: 3}
   reloadingSfx: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}

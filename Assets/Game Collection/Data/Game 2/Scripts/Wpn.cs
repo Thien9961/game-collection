@@ -12,7 +12,6 @@ public class Wpn : MonoBehaviour
     public int clipMax, clip;
     public float reloadTime, accuracy, cooldown,launchForce = 100;
     public GameObject ammunition;
-    static public GameObject muzzle;
     public ParticleSystem muzzleflash;
     public AudioClip firingSfx, reloadingSfx;
     static public TextMeshProUGUI ammoTxt;
@@ -37,14 +36,22 @@ public class Wpn : MonoBehaviour
     {
         if (isready && clip>0)
         {
-            if(firingSfx!=null)
+            Vector3 muzzle = transform.parent.transform.Find("Camera").transform.position;
+            if (firingSfx!=null)
                 GetComponent<AudioSource>().PlayOneShot(firingSfx);
             GameObject user=transform.parent.gameObject;
             clip--;
             isready = false;
-            Instantiate(muzzleflash, transform.position, muzzleflash.transform.rotation).Play();
+            ParticleSystem p = Instantiate(muzzleflash);
+            p.transform.parent = transform;
+            p.transform.localPosition = muzzleflash.transform.localPosition;
+            p.transform.rotation = muzzleflash.transform.localRotation;
+            p.transform.localScale = muzzleflash.transform.localScale;
+            var v = p.main;
+            v.stopAction = ParticleSystemStopAction.Destroy;
+            p.Play(false);
             StartCoroutine(firing(cooldown));
-            Instantiate(ammunition, muzzle.transform.position, ammunition.transform.rotation).GetComponent<Rigidbody>().AddForce(transform.parent.forward * launchForce, ForceMode.Impulse);
+            Instantiate(ammunition, muzzle, ammunition.transform.rotation).GetComponent<Rigidbody>().AddForce(transform.parent.forward * launchForce, ForceMode.Impulse);
             transform.parent.GetComponent<Animator>().Play("Shoot_SingleShot_AR");
         }
     }
@@ -63,14 +70,14 @@ public class Wpn : MonoBehaviour
 
     void Start()
     {
-        ammoTxt=GameObject.Find("Canvas").transform.Find("Ammo Text").GetComponent<TextMeshProUGUI>();
-        muzzle = transform.Find("Muzzle").gameObject;
+        ammoTxt =GameObject.Find("Canvas").transform.Find("Ammo Text").GetComponent<TextMeshProUGUI>();
+        muzzleflash = transform.Find("Muzzle Flash").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ammoTxt.SetText(clip + "/" + clipMax);
+        ammoTxt.SetText("Ammo: "+clip + "/" + clipMax);
         
         if (GameObject.Find("Game Manager").GetComponent<Game2.GameManager>().isplaying)
         {
