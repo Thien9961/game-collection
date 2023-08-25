@@ -37,11 +37,12 @@ public class Wpn : MonoBehaviour
     {
         if (isready && clip>0)
         {
-            GetComponent<AudioSource>().PlayOneShot(firingSfx);
+            if(firingSfx!=null)
+                GetComponent<AudioSource>().PlayOneShot(firingSfx);
             GameObject user=transform.parent.gameObject;
             clip--;
             isready = false;
-            Instantiate(muzzleflash, muzzle.transform.position, muzzleflash.transform.rotation).Play();
+            Instantiate(muzzleflash, transform.position, muzzleflash.transform.rotation).Play();
             StartCoroutine(firing(cooldown));
             Instantiate(ammunition, muzzle.transform.position, ammunition.transform.rotation).GetComponent<Rigidbody>().AddForce(transform.parent.forward * launchForce, ForceMode.Impulse);
             transform.parent.GetComponent<Animator>().Play("Shoot_SingleShot_AR");
@@ -51,7 +52,8 @@ public class Wpn : MonoBehaviour
     void wpn_reload()
     {
         transform.parent.GetComponent<Animator>().Play("Reload");
-        GetComponent<AudioSource>().PlayOneShot(reloadingSfx);
+        if(reloadingSfx!=null)
+            GetComponent<AudioSource>().PlayOneShot(reloadingSfx);
         isready = false;
         isreloading=true;
         StartCoroutine(reloading(reloadTime));

@@ -331,7 +331,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 1
   spawnChance: 20
-  onDeathVfx: {fileID: 0}
+  onDeathVfx: {fileID: 3112107912949281614, guid: 2f790dd45e0ffaf46bc76547c80e1aac,
+    type: 3}
+  vfxColor: {r: 1, g: 1, b: 1, a: 1}
   onDamagedSfx: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
   onDeathSfx: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
 --- !u!114 &6767657699186109295

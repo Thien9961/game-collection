@@ -61,7 +61,7 @@ namespace Game2
             else if(time.value>0)
             {
                 Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                Cursor.visible = true;        
             }
             else
             {
@@ -69,6 +69,7 @@ namespace Game2
                 Cursor.visible = true;
                 isplaying = false;
                 restartmenu.SetActive(true);
+                GameObject.Find("Canvas").transform.Find("Crosshair").gameObject.SetActive(false);
             }
         }
 

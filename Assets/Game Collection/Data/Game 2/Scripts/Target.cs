@@ -8,6 +8,7 @@ public class Target : MonoBehaviour
 {
     public float hp = 1f,spawnChance=100;
     public ParticleSystem onDeathVfx;
+    public Color vfxColor= Color.white;
     public AudioClip onDamagedSfx,onDeathSfx;
     Effect effect;
 
@@ -26,7 +27,8 @@ public class Target : MonoBehaviour
 
     public void TakeDamage()
     {
-        GetComponent<AudioSource>().PlayOneShot(onDamagedSfx);
+        if(onDamagedSfx!=null)
+            GetComponent<AudioSource>().PlayOneShot(onDamagedSfx);
         effect.RegisterEvent(Event.TAKE_DAMAGE);
     }
     void Start()
@@ -38,7 +40,15 @@ public class Target : MonoBehaviour
     {
         effect.RegisterEvent(Event.DEATH);
         playSfx(onDeathSfx);
-        Destroy(gameObject);
+        onDeathVfx.startColor = vfxColor;
+        onDeathVfx.transform.localScale = transform.localScale;
+        foreach(Transform t in onDeathVfx.transform)
+        {
+            t.GetComponent<ParticleSystem>().startColor = vfxColor;
+            t.localScale= transform.localScale;
+        } 
+        Instantiate(onDeathVfx, transform.position, onDeathVfx.transform.rotation);
+        Destroy(gameObject);  
     }
     // Update is called once per frame
     void Update()

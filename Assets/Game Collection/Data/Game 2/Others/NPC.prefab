@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7461940365516899524
+--- !u!1001 &7690319418859512667
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1522934087632421793, guid: f432554f564e69242897607d34218939,
         type: 3}
       propertyPath: m_Name
-      value: Player
+      value: NPC
       objectReference: {fileID: 0}
     - target: {fileID: 1590450465741845785, guid: f432554f564e69242897607d34218939,
         type: 3}
@@ -115,19 +115,19 @@ PrefabInstance:
     - {fileID: 3087810525541285487, guid: f432554f564e69242897607d34218939, type: 3}
     - {fileID: 3139529844585138744, guid: f432554f564e69242897607d34218939, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f432554f564e69242897607d34218939, type: 3}
---- !u!1 &2807091342632564314 stripped
+--- !u!1 &3153479931142361541 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4718340356464751262, guid: f432554f564e69242897607d34218939,
     type: 3}
-  m_PrefabInstance: {fileID: 7461940365516899524}
+  m_PrefabInstance: {fileID: 7690319418859512667}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &1820962800926572902
+--- !u!82 &1820962802926302036
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2807091342632564314}
+  m_GameObject: {fileID: 3153479931142361541}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -217,13 +217,13 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8922323461416471732
+--- !u!114 &8922323459978968710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2807091342632564314}
+  m_GameObject: {fileID: 3153479931142361541}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d410ebc1c1f8c7e45b6eebe30398c726, type: 3}
@@ -242,33 +242,72 @@ MonoBehaviour:
   muzzleflash: {fileID: 0}
   firingSfx: {fileID: 0}
   reloadingSfx: {fileID: 0}
---- !u!1 &8263172113924523877 stripped
+--- !u!1 &9194957082707812602 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1522934087632421793, guid: f432554f564e69242897607d34218939,
     type: 3}
-  m_PrefabInstance: {fileID: 7461940365516899524}
+  m_PrefabInstance: {fileID: 7690319418859512667}
   m_PrefabAsset: {fileID: 0}
---- !u!81 &-3482574730571343943
-AudioListener:
+--- !u!54 &5715629673125807832
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8263172113924523877}
+  m_GameObject: {fileID: 9194957082707812602}
+  serializedVersion: 2
+  m_Mass: 1000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &7928822829837700881
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194957082707812602}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
---- !u!114 &7623132253294670699
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.0590134, z: 1}
+  m_Center: {x: 0, y: 1.0090594, z: 0}
+--- !u!114 &-5439571607334095500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8263172113924523877}
+  m_GameObject: {fileID: 9194957082707812602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264eeb0cf7e170d43847c94533202d88, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c251790f4e297b4ab7ba3185f6feeb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyCap: 100
-  duration: 20
-  gmScript: {fileID: 0}
-  energy: {fileID: 0}
+  eventType: 1
+  score: 0
+  time: -1000
+  energy: 0
+  ammo: 0
+--- !u!114 &5621728304332321444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194957082707812602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc4dbfe680a48e49b921a6e1631d585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
+  spawnChance: 0
+  onDeathVfx: {fileID: 0}
+  onDamagedSfx: {fileID: 0}
+  onDeathSfx: {fileID: 0}
