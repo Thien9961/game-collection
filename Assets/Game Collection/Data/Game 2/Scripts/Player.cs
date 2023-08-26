@@ -84,7 +84,6 @@ namespace Game2
                     Debug.Log(GetWpn().gameObject.name);
                 }     
         }
-
         void Start()
         {
             
@@ -93,8 +92,7 @@ namespace Game2
             energy.onValueChanged.AddListener(delegate { Action(); });
             energy.value = 0;
             energy.maxValue = energyCap;
-            Animator animator = GetComponent<Animator>();
-            animator.Play("Shoot_SingleShot_AR");
+ 
         }
 
         // Update is called once per frame
@@ -115,12 +113,12 @@ namespace Game2
                         energy.value -= energyCap / duration / (1 / Time.deltaTime);
                 }
                 float a = transform.rotation.eulerAngles.x + -1 * dx * Time.deltaTime * Input.GetAxis("Mouse Y") * mouseSensivity.value, b= transform.rotation.eulerAngles.y + dx * Time.deltaTime * Input.GetAxis("Mouse X") * mouseSensivity.value;
-                if (a < 60)
+                if (a < 45)
                     transform.rotation = Quaternion.Euler(a, b, 0);
-                else if(a>=60 && a<180)
-                    transform.rotation = Quaternion.Euler(60, b, 0);
-                else if (a>180 && a<=300)
-                    transform.rotation = Quaternion.Euler(-60, b, 0);
+                else if(a>=45 && a<180)
+                    transform.rotation = Quaternion.Euler(45, b, 0);
+                else if (a>180 && a<=315)
+                    transform.rotation = Quaternion.Euler(-45, b, 0);
                 else
                     transform.rotation = Quaternion.Euler(a, b, 0);
             }       

@@ -24,8 +24,8 @@ public class Ammunition : MonoBehaviour
         if (victim.GetComponent<Target>() != null)
         {
             Target script = victim.GetComponent<Target>();
-            script.hp -= damage;
             script.TakeDamage();
+            script.hp -= damage;            
             playSfx(onDestroySfx);
             if(onDestroyVfx!=null)
                 onDestroyVfx.Play();

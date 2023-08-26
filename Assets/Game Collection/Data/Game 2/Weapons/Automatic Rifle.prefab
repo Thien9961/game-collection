@@ -53,9 +53,9 @@ MonoBehaviour:
   accuracy: 1
   cooldown: 0.095
   launchForce: 100
-  ammunition: {fileID: 8308622595368910906, guid: 3c1225a586b9cee4b9531d1c6d0c4804,
+  ammunition: {fileID: 3598476317658261784, guid: be1762fed6b347543a6f3016dab34ce7,
     type: 3}
-  muzzleflash: {fileID: 7095843453894283377, guid: 07965c59137b21c429eacfa08c2aa0f2,
+  muzzleflash: {fileID: 3563136240452285785, guid: 58f7bea03af954947a9a5b6c8209891f,
     type: 3}
-  firingSfx: {fileID: 8300000, guid: fecc3e7a0166a104cb810435f6fdf37b, type: 3}
-  reloadingSfx: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+  firingSfx: {fileID: 8300000, guid: 1b145bcffd767854fb0c71c37678ebaa, type: 3}
+  reloadingSfx: {fileID: 8300000, guid: e1d79f4a0c7873742babc5f6e9ff800e, type: 3}

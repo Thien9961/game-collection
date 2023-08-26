@@ -10,7 +10,7 @@ public class Target : MonoBehaviour
     public ParticleSystem onDeathVfx;
     public Color vfxColor= Color.white;
     public AudioClip onDamagedSfx,onDeathSfx;
-    Effect effect;
+    Effect[] effects;
 
     // Start is called before the first frame update
     void playSfx(AudioClip whichclip)
@@ -27,19 +27,19 @@ public class Target : MonoBehaviour
 
     public void TakeDamage()
     {
-        if(onDamagedSfx!=null)
-            GetComponent<AudioSource>().PlayOneShot(onDamagedSfx);
-        effect.RegisterEvent(Event.TAKE_DAMAGE);
+        if (onDamagedSfx!=null)
+            GetComponent<AudioSource>().PlayOneShot(onDamagedSfx);  
     }
     void Start()
     {
-        effect=GetComponent<Effect>();
+        effects=GetComponents<Effect>();
         
     }
 
-    void death()
+    protected void death()
     {
-        effect.RegisterEvent(Event.DEATH);
+        foreach (Effect effect in effects)
+            effect.RegisterEvent(Event.DEATH);
         playSfx(onDeathSfx);
         if(onDeathVfx!=null)
         {
@@ -55,7 +55,7 @@ public class Target : MonoBehaviour
         Destroy(gameObject);  
     }
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (transform.position.y < -10)
             Destroy(gameObject);

@@ -15,7 +15,7 @@ public class Modify : Effect
         manager.score += score;
         player.energy.value += energy;
         player.GetWpn().GetComponent<Wpn>().clip += ammo;
-        manager.time.value += time;
+        manager.time.value += time/Time.fixedDeltaTime;
     }
     void Start()
     {

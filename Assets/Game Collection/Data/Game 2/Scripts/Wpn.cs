@@ -16,14 +16,15 @@ public class Wpn : MonoBehaviour
     public AudioClip firingSfx, reloadingSfx;
     static public TextMeshProUGUI ammoTxt;
     bool isready=true;
-    bool isreloading = false;
     // Start is called before the first frame update 
 
     
     IEnumerator firing(float sec)
     {
         yield return new WaitForSeconds(sec);
-        isready = true;      
+        isready = true;
+        transform.parent.GetComponent<Animator>().SetBool("attacking", false);
+        transform.parent.GetComponent<Animator>().ResetTrigger("trigger");
     }
 
     IEnumerator reloading(float sec)
@@ -31,6 +32,8 @@ public class Wpn : MonoBehaviour
         
         yield return new WaitForSeconds(sec);
         isready = true;
+        transform.parent.GetComponent<Animator>().SetBool("reloading", false);
+        
     }
     void wpn_fire()
     {
@@ -52,17 +55,22 @@ public class Wpn : MonoBehaviour
             p.Play(false);
             StartCoroutine(firing(cooldown));
             Instantiate(ammunition, muzzle, ammunition.transform.rotation).GetComponent<Rigidbody>().AddForce(transform.parent.forward * launchForce, ForceMode.Impulse);
-            transform.parent.GetComponent<Animator>().Play("Shoot_SingleShot_AR");
+            if (!transform.parent.GetComponent<Game2.Player>().GetWpn().fullauto)
+                transform.parent.GetComponent<Animator>().SetBool("attacking", true);
+            else
+                transform.parent.GetComponent<Animator>().SetTrigger("trigger");
         }
     }
-
+    void resettrigger()
+    {
+        
+    }
     void wpn_reload()
     {
-        transform.parent.GetComponent<Animator>().Play("Reload");
+        transform.parent.GetComponent<Animator>().SetBool("reloading",true);
         if(reloadingSfx!=null)
             GetComponent<AudioSource>().PlayOneShot(reloadingSfx);
         isready = false;
-        isreloading=true;
         StartCoroutine(reloading(reloadTime));
         while (clip < clipMax) 
             clip++;
@@ -93,5 +101,7 @@ public class Wpn : MonoBehaviour
         if (Input.GetKeyDown(reload))
             wpn_reload();
     }
+
+
 }
 

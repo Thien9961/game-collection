@@ -48,13 +48,13 @@ public class Effect : MonoBehaviour
         if (eventType == e)
             trigger();
     }
-    void Start()
+    protected virtual void Start()
     {
         RegisterEvent(Event.BIRTH);  
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         RegisterEvent(Event.ALIVE);
     }

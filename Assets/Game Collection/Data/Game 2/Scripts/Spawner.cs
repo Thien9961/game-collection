@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 namespace Game2
 {
     public class Spawner : MonoBehaviour
     {
         public List<GameObject> target;
-        private float force;
+        static private float force;
         public float spawnInterval=1.5f;
         public Vector3 spawnArea;
 
@@ -20,6 +21,14 @@ namespace Game2
             v.y=Random.Range(b.min.y, b.max.y);
             v.z=Random.Range(b.min.z, b.max.z);
             return v;
+        }
+
+        static public GameObject SpawnAtLoc(GameObject whichtarget, Vector3 location)
+        {
+            force = Random.Range(15.0f, 20.0f);
+            GameObject g = Instantiate(whichtarget,location,whichtarget.transform.rotation);
+            g.GetComponent<Rigidbody>().AddForce(Vector3.up*force,ForceMode.Impulse);
+            return g;
         }
         void Spawn()
         {
@@ -34,6 +43,7 @@ namespace Game2
                     a += target[b].GetComponent<Target>().spawnChance;
                 }
                 while (a < r);
+                force = Random.Range(15.0f, 20.0f);
                 Vector3 pos = Game2.Spawner.RandomPointInBounds(bounds);
                 Rigidbody rb = Instantiate(target[b], pos, Random.rotation).GetComponent<Rigidbody>();
                 rb.AddForce(Vector3.up * force, ForceMode.Impulse);   
@@ -42,7 +52,7 @@ namespace Game2
         // Start is called before the first frame update
         void Start()
         {
-            force = Random.Range(15.0f, 20.0f);
+            
             gmScript = GameObject.Find("Game Manager").GetComponent<Game2.GameManager>();
             InvokeRepeating("Spawn", 1, spawnInterval);
             Vector3 v = new Vector3(spawnArea.x * transform.parent.localScale.x, spawnArea.y * transform.parent.localScale.y, spawnArea.z * transform.parent.localScale.z);

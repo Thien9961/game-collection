@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Data;
 using System;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Game2
 {
@@ -15,7 +16,7 @@ namespace Game2
         public int fps,DefaulWpnIndex=0;
         public bool isplaying;
         public float score = 0;
-        public float gameTime=180;
+        public float gameTime=60;
         public TextMeshProUGUI scoreTxt;
         public GameObject restartmenu,pausemenu;
         public UnityEngine.UI.Slider time;
@@ -42,9 +43,10 @@ namespace Game2
         }
         void Start()
         {
-            fps = (int)(1 / Time.deltaTime);
             isplaying = true;
-            time.value = gameTime * fps ;
+            gameTime /= Time.fixedDeltaTime;
+            time.maxValue = gameTime;
+            time.value = time.maxValue;
             score = 0;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -55,9 +57,9 @@ namespace Game2
         }
         void hud_update()
         {
-            scoreTxt.SetText("Score: " + score);
+            scoreTxt.SetText("Score: " + score); 
             if (time.value > 0 && isplaying)
-                time.value -= Time.deltaTime;
+                time.value --;   
             else if(time.value>0)
             {
                 Cursor.lockState = CursorLockMode.None;

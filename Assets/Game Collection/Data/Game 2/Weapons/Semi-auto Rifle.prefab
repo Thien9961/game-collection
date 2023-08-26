@@ -49,7 +49,7 @@ MonoBehaviour:
   fullauto: 0
   clipMax: 20
   clip: 20
-  reloadTime: 2
+  reloadTime: 2.5
   accuracy: 1
   cooldown: 0.5
   launchForce: 100
@@ -58,4 +58,4 @@ MonoBehaviour:
   muzzleflash: {fileID: 7095843453894283377, guid: 07965c59137b21c429eacfa08c2aa0f2,
     type: 3}
   firingSfx: {fileID: 8300000, guid: fecc3e7a0166a104cb810435f6fdf37b, type: 3}
-  reloadingSfx: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+  reloadingSfx: {fileID: 8300000, guid: e1d79f4a0c7873742babc5f6e9ff800e, type: 3}
