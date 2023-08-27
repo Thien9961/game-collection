@@ -191,7 +191,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 5
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -330,8 +330,8 @@ MonoBehaviour:
   onDeathVfx: {fileID: 3112107912949281614, guid: 2f790dd45e0ffaf46bc76547c80e1aac,
     type: 3}
   vfxColor: {r: 1, g: 0, b: 0, a: 1}
-  onDamagedSfx: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
-  onDeathSfx: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
+  onDamagedSfx: {fileID: 0}
+  onDeathSfx: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
 --- !u!1 &3651235111535399761
 GameObject:
   m_ObjectHideFlags: 0

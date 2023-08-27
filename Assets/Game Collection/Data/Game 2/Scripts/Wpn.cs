@@ -39,12 +39,12 @@ public class Wpn : MonoBehaviour
     {
         if (isready && clip>0)
         {
+            isready = false;
             Vector3 muzzle = transform.parent.transform.Find("Camera").transform.position;
             if (firingSfx!=null)
                 GetComponent<AudioSource>().PlayOneShot(firingSfx);
             GameObject user=transform.parent.gameObject;
-            clip--;
-            isready = false;
+            clip--;        
             ParticleSystem p = Instantiate(muzzleflash);
             p.transform.parent = transform;
             p.transform.localPosition = muzzleflash.transform.localPosition;
@@ -67,13 +67,17 @@ public class Wpn : MonoBehaviour
     }
     void wpn_reload()
     {
-        transform.parent.GetComponent<Animator>().SetBool("reloading",true);
-        if(reloadingSfx!=null)
-            GetComponent<AudioSource>().PlayOneShot(reloadingSfx);
-        isready = false;
-        StartCoroutine(reloading(reloadTime));
-        while (clip < clipMax) 
-            clip++;
+        if (isready)
+        {
+            isready = false;
+            transform.parent.GetComponent<Animator>().SetBool("reloading", true);
+            if (reloadingSfx != null)
+                GetComponent<AudioSource>().PlayOneShot(reloadingSfx);
+            StartCoroutine(reloading(reloadTime));
+            while (clip < clipMax)
+                clip++;
+        }
+        
     }
 
     void Start()

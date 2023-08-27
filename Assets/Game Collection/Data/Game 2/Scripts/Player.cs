@@ -38,6 +38,7 @@ namespace Game2
                 wpn.reloadingSfx = newWpn.reloadingSfx;
                 wpn.reloadTime = newWpn.reloadTime;
                 wpn.trigger = newWpn.trigger;
+                wpn.cooldown = newWpn.cooldown;
                 wpn.gameObject.name = whichwpn.gameObject.name;
             } 
         }
@@ -59,7 +60,7 @@ namespace Game2
             a[2] = weapon1.clipMax == weapon2.clipMax;
             a[3] = weapon1.firingSfx == weapon2.firingSfx;
             a[4] = weapon1.launchForce == weapon2.launchForce;
-            a[5] = true;
+            a[5] = weapon1.cooldown==weapon2.cooldown;
             a[6] = weapon1.ammunition == weapon2.ammunition;
             a[7] = weapon1.accuracy == weapon2.accuracy;
             a[8] = weapon1.reloadingSfx == weapon2.reloadingSfx;
