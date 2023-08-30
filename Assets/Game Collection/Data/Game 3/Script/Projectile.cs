@@ -23,10 +23,14 @@ public class Projectile : MonoBehaviour
 
     protected void playSfx(AudioClip whichclip)
     {
-        GameObject au = new GameObject();
-        au.transform.position = transform.position;
-        au.AddComponent<AudioSource>();
-        au.GetComponent<AudioSource>().PlayOneShot(whichclip);   
+        if (whichclip != null)
+        {
+            GameObject au = new GameObject();
+            au.transform.position = transform.position;
+            au.AddComponent<AudioSource>();
+            au.GetComponent<AudioSource>().PlayOneShot(whichclip);
+            au.AddComponent<RemoveLeak>();
+        }
     }
     protected virtual void OnTriggerEnter(Collider collider)
     {

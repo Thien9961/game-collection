@@ -5,50 +5,30 @@ using UnityEngine;
 namespace Game3
 {
     public class Spawner : MonoBehaviour
-    {
-        
-        public List<GameObject> enemy;
-        public int counterEnemy = 0, counterWave = 0;
-        Game3.GameManager gmScript;
-        public bool spawning=false;
+    {  
         // Start is called before the first frame update
-        void spawnEnemy()
+        public void SpawnRandom(GameObject[] objects,ref int weight)
         {
-            counterWave++;
-            int diffWave = counterWave * gmScript.diffIncr + gmScript.diffBase, diff = 0;
-            Enemy e;
-            Debug.Log("Diff Wave: "+diffWave);
-            while (diffWave > diff)
-            {
-                e = enemy[Random.Range(0, enemy.Count)].GetComponent<Enemy>();
-                if (diff + e.diffPts <= diffWave)
-                {
-                    diff += e.diffPts;
-                    counterEnemy++;
-                    Vector3 v;
-                    v.x = e.gameObject.transform.position.x;
-                    v.y = Random.Range(5, 10);
-                    v.z = Random.Range(-10, 10);
-                    Instantiate(e.gameObject, v, e.gameObject.transform.rotation);
-                }
-            } 
-            spawning = false;
+            Vector3 v;
+            v.x = transform.position.x;
+            int j= Random.Range(0, objects.Length); 
+            v.y = transform.position.y + objects[j].transform.localScale.y / 2;
+            v.z = transform.position.z + Random.Range(-0.9f * transform.localScale.z/2, 0.9f * transform.localScale.z/2);
+            Instantiate(objects[j], v, objects[j].transform.rotation);
+            weight += objects[j].GetComponent<Enemy>().diffPts;
+            Debug.Log(name + " has spawn a " + objects[j].name+"("+ objects[j].GetComponent<Enemy>().diffPts + ")");
         }
         void Start()
         {
-            gmScript = GameObject.Find("Game Manager").GetComponent<Game3.GameManager>();
+
         }
+
+
 
         // Update is called once per frame
         void Update()
         {
-            gmScript.txtEnemy.SetText("Enemy: " + counterEnemy);
-            gmScript.txtWave.SetText("Wave: " + counterWave);
-            if (gmScript.isplaying && counterEnemy == 0 && !spawning)
-            {
-                Invoke(nameof(spawnEnemy), 3);
-                spawning = true;
-            }
+
                 
         }
     }

@@ -16,12 +16,8 @@ public class Lifeform:MonoBehaviour
     public AudioClip onDeathSfx, onHurtSfx;
     public static readonly int STATE_NORMAL=0, STATE_STUNNED = 1, STATE_DEATH=2;
 
+
     protected Game3.GameManager manager;
-    protected void OnCollisionEnter(Collision collision)
-    {
-        if(GetComponent<Lifeform>()!=null && collision.collider.GetComponent<Lifeform>()!=null)
-            Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider);
-    }
     protected virtual void Start()
     {
         hp.maxValue = maxhp;
@@ -37,7 +33,8 @@ public class Lifeform:MonoBehaviour
         rb=GetComponent<Rigidbody>();
         rb.AddForce(force, ForceMode.Impulse);
         hp.value -= damage;
-        GetComponent<AudioSource>().PlayOneShot(onHurtSfx);
+        if(onHurtSfx != null)
+            GetComponent<AudioSource>().PlayOneShot(onHurtSfx);
     }
     protected virtual void stunned()
     {
@@ -48,14 +45,22 @@ public class Lifeform:MonoBehaviour
         else
             state = STATE_STUNNED;
     }
+    protected void playSfx(AudioClip whichclip)
+    {
+        if (whichclip != null)
+        {
+            GameObject au = new GameObject();
+            au.transform.position = transform.position;
+            au.AddComponent<AudioSource>();
+            au.GetComponent<AudioSource>().PlayOneShot(whichclip);
+            au.AddComponent<RemoveLeak>();
+        }
+    }
 
     protected virtual void death()
     {
         Destroy(gameObject);
-        GameObject au = new GameObject();
-        au.transform.position = transform.position;
-        au.AddComponent<AudioSource>();
-        au.GetComponent<AudioSource>().PlayOneShot(onDeathSfx);
+        playSfx(onDeathSfx);
     }
     public void stateUpdate()
     {

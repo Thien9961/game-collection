@@ -10,6 +10,7 @@ using static UnityEngine.Rendering.DebugUI;
     public static readonly int PRESS=0,HOLD=1,RELEASE=2,ON=3,OFF=4;
     public bool isready=true;
     public AudioClip onCastSfx=null;
+    public string paramName;//Animator Parameter Name;
     protected virtual void reset()
     {
         isready = true;
@@ -61,11 +62,21 @@ using static UnityEngine.Rendering.DebugUI;
                 }
                 start();
             }
+            foreach (var b in GetComponent<Animator>().parameters)
+                if(b.name == paramName)
+                {
+                    GetComponent<Animator>().SetBool(b.name, cnd);
+                    break;
+                }
+                    
         }
     }
     public virtual void start()
     {
         Debug.Log("Ability start");
-        GetComponent<AudioSource>().PlayOneShot(onCastSfx);
+        if(onCastSfx != null)
+            GetComponent<AudioSource>().PlayOneShot(onCastSfx);
     }
+
+
 }

@@ -3,19 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+
+public enum Signal
+{
+    POSITIVE,
+    NEGATIVE,
+    NONE
+}
 public class Controller : MonoBehaviour
 {
     public float attackRange;
     private BasicAttack basicattack;
-    private Movement movement;
+    private Movement[] movement;
 
     public allowedTarget attackTarget;
-    private enum Signal
-    {
-        POSITIVE,
-        NEGATIVE,
-        NONE
-    }
+
     private Signal signalMove = Signal.POSITIVE;
     // Start is called before the first frame update
     private bool isAttacking;
@@ -24,59 +27,64 @@ public class Controller : MonoBehaviour
     private void move(Signal s)
     {
         bool moveCnd = false;
-        if (s == Signal.POSITIVE)
-            movement.waitforinput(Ability.ON, ref moveCnd);
+         if (s == Signal.POSITIVE)
+            movement[0].waitforinput(Ability.ON, ref moveCnd);
         else if (s == Signal.NEGATIVE)
-            movement.waitforNegativeInput(Ability.ON, ref moveCnd);
+            movement[1].waitforinput(Ability.ON, ref moveCnd);
     }
 
     private void attack(ref bool attacking,GameObject whichtarget)
     {
-        bool attackCnd = false;
-        Lifeform target=whichtarget.GetComponent<Lifeform>();
-        if (target != null)
+        if (whichtarget != null)
         {
-            switch (attackTarget)
+            bool attackCnd = false;
+            Lifeform target = whichtarget.GetComponent<Lifeform>();
+            if (target != null)
             {
-                case allowedTarget.ENEMY:
-                    {
-                        if (target.Faction != GetComponent<Lifeform>().Faction)
+                switch (attackTarget)
+                {
+                    case allowedTarget.ENEMY:
+                        {
+                            if (target.Faction != GetComponent<Lifeform>().Faction)
+                            {
+                                attacking = true;
+                                basicattack.waitforinput(Ability.ON, ref attackCnd);
+
+                            }
+                            else
+                                attacking = false;
+                            break;
+                        }
+                    case allowedTarget.ALLIED:
+                        {
+                            if (target.Faction == GetComponent<Lifeform>().Faction)
+                            {
+                                attacking = true;
+                                basicattack.waitforinput(Ability.ON, ref attackCnd);
+
+                            }
+                            else
+                                attacking = false;
+                            break;
+                        }
+                    case allowedTarget.ALL:
                         {
                             attacking = true;
                             basicattack.waitforinput(Ability.ON, ref attackCnd);
 
+                            break;
                         }
-                        else
-                            attacking = false;
-                        break;
-                    }
-                case allowedTarget.ALLIED:
-                    {
-                        if (target.Faction == GetComponent<Lifeform>().Faction)
+                    default:
                         {
-                            attacking = true;
-                            basicattack.waitforinput(Ability.ON, ref attackCnd);
-
-                        }
-                        else
                             attacking = false;
-                        break;
-                    }
-                case allowedTarget.ALL:
-                    {
-                        attacking = true;
-                        basicattack.waitforinput(Ability.ON, ref attackCnd);
-
-                        break;
-                    }
-                default:
-                    {
-                        attacking = false;
-                        break;
-                    }
+                            break;
+                        }
+                }
             }
+
         }
-        
+        else
+            basicattack.waitforinput(Ability.OFF, ref attacking);  
     }
     public void control()
     {
@@ -90,7 +98,7 @@ public class Controller : MonoBehaviour
         if (detectTarget)
             attack(ref isAttacking, hitTarget.collider.gameObject);
         else
-            isAttacking=false;
+            attack(ref isAttacking, null);
         if (detectGnd && !isAttacking)
             move(signalMove);
         else if (!detectGnd && !isAttacking)
@@ -107,7 +115,7 @@ public class Controller : MonoBehaviour
     void Start()
     {
         basicattack = GetComponent<BasicAttack>();
-        movement = GetComponent<Movement>();
+        movement = GetComponents<Movement>();
         basicattack.damage += GetComponent<Enemy>().atk;
     }
 

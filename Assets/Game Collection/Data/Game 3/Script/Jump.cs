@@ -33,6 +33,6 @@ public class Jump : Ability
     }
     private void Update()
     {
-        GetComponent<Animator>().SetBool("onGnd", grounded);
+        
     }
 }

@@ -7,7 +7,7 @@ public class Character : Lifeform
 {
     public float atk = 0;
     private BasicAttack basicattack;
-    private Movement movement;
+    private Movement[] movement;
     private Jump jump;
     private Heal heal;
     private Switch[] wpn;
@@ -19,7 +19,7 @@ public class Character : Lifeform
         base.Start();
         animator = GetComponent<Animator>();
         basicattack = GetComponent<BasicAttack>();
-        movement = GetComponent<Movement>();
+        movement = GetComponents<Movement>();
         jump = GetComponent<Jump>();
         heal = GetComponent<Heal>();
         wpn=GetComponents<Switch>();
@@ -27,8 +27,8 @@ public class Character : Lifeform
     }
 
     protected override void death()
-    {
-        animator.Play("Die");
+    { 
+        animator.SetBool("alive", false);
         manager.isplaying = false;
         manager.menuRestart.SetActive(true);
     }
@@ -38,14 +38,14 @@ public class Character : Lifeform
         base.Update();
         if(manager.isplaying)
         {
-            bool atkCnd=false,moveCnd=false,jumpCnd=false,healCnd=false,wpnCnd=false;
+            bool atkCnd = false, moveCnd = false, jumpCnd = false, healCnd = false, wpnCnd = false;
             basicattack.waitforinput(BasicAttack.HOLD,ref atkCnd);
-            movement.waitforinput(Movement.HOLD, ref moveCnd);
-            movement.waitforNegativeInput(Movement.HOLD, ref moveCnd);
             jump.waitforinput(Jump.PRESS, ref jumpCnd);
             heal.waitforinput(Heal.PRESS, ref healCnd);
             foreach (Ability a in wpn)
                 a.waitforinput(Ability.PRESS, ref wpnCnd );
+            foreach (Ability m in movement)
+                m.waitforinput(Ability.HOLD,ref moveCnd);
         }
           
     }

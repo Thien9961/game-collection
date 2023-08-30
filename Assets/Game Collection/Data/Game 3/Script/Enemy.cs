@@ -7,9 +7,9 @@ public class Enemy : Lifeform
 {
     public float atk=0;
     public int diffPts,wave;
-    Game3.Spawner spawner;
+    Game3.GameManager manager;
     private BasicAttack basicattack;
-    private Movement movement;
+    private Movement[] movement;
     Controller controller;
 
     // Start is called before the first frame update
@@ -17,16 +17,16 @@ public class Enemy : Lifeform
     protected override void Start()
     {
         base.Start();
-        spawner = GameObject.Find("Spawner").GetComponent<Game3.Spawner>();
+        manager = GameObject.Find("Game Manager").GetComponent<Game3.GameManager>();
         controller=GetComponent<Controller>();
     }
     private void OnDestroy()
     {
-        spawner.counterEnemy--;
+        manager.counterEnemy--;
     }
     protected override void death()
     {
-        animator.Play("Die");
+        animator.SetBool("alive", false);
         Destroy(gameObject, 2.0f);
     }
 
