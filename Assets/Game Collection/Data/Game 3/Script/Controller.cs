@@ -1,4 +1,5 @@
 using Game3;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,6 +17,7 @@ public class Controller : MonoBehaviour
     public float attackRange;
     private BasicAttack basicattack;
     private Movement[] movement;
+    private Guard guard;
 
     public allowedTarget attackTarget;
 
@@ -111,12 +113,21 @@ public class Controller : MonoBehaviour
         }
         else
             move(Signal.NONE);
+        
+    }
+    IEnumerator TriggerPassive(Ability ability,float delay)
+    {
+        yield return delay;
+        bool b = false;
+        GetComponent<Guard>()?.waitforinput(Guard.ON, ref b);
     }
     void Start()
     {
+        
         basicattack = GetComponent<BasicAttack>();
         movement = GetComponents<Movement>();
         basicattack.damage += GetComponent<Enemy>().atk;
+        StartCoroutine(TriggerPassive(guard, 0.1f));
     }
 
     // Update is called once per frame

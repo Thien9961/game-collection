@@ -8,8 +8,6 @@ public class Enemy : Lifeform
     public float atk=0;
     public int diffPts,wave;
     Game3.GameManager manager;
-    private BasicAttack basicattack;
-    private Movement[] movement;
     Controller controller;
 
     // Start is called before the first frame update
@@ -33,7 +31,7 @@ public class Enemy : Lifeform
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (manager.isplaying)
+        if (manager.isplaying && hp.value>0)
             controller.control();
     }
 }

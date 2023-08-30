@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9402162a54795b84c89f07ec394e19e1, type: 2}
+  - {fileID: 2100000, guid: 3c78731abb6357e40bb0c6f0cc26c609, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -134,7 +134,6 @@ MonoBehaviour:
   allowedTarget: 0
   OnImpactDestroy: 1
   onDestroySfx: {fileID: 0}
-  onHitSfx: {fileID: 0}
   speed: 6
   impactForce: 0
 --- !u!82 &-5260180817027069786

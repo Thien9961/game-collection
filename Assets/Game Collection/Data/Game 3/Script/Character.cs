@@ -9,8 +9,8 @@ public class Character : Lifeform
     private BasicAttack basicattack;
     private Movement[] movement;
     private Jump jump;
-    private Heal heal;
     private Switch[] wpn;
+    private Guard guard;
 
     // Start is called before the first frame update
 
@@ -21,8 +21,8 @@ public class Character : Lifeform
         basicattack = GetComponent<BasicAttack>();
         movement = GetComponents<Movement>();
         jump = GetComponent<Jump>();
-        heal = GetComponent<Heal>();
         wpn=GetComponents<Switch>();
+        guard = GetComponent<Guard>();
         basicattack.damage += atk;
     }
 
@@ -38,10 +38,10 @@ public class Character : Lifeform
         base.Update();
         if(manager.isplaying)
         {
-            bool atkCnd = false, moveCnd = false, jumpCnd = false, healCnd = false, wpnCnd = false;
+            bool atkCnd = false, moveCnd = false, jumpCnd = false, wpnCnd = false, guardCnd=false;
             basicattack.waitforinput(BasicAttack.HOLD,ref atkCnd);
             jump.waitforinput(Jump.PRESS, ref jumpCnd);
-            heal.waitforinput(Heal.PRESS, ref healCnd);
+            guard.waitforinput(Guard.PRESS, ref guardCnd);
             foreach (Ability a in wpn)
                 a.waitforinput(Ability.PRESS, ref wpnCnd );
             foreach (Ability m in movement)

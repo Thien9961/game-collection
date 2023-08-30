@@ -1674,13 +1674,13 @@ GameObject:
   - component: {fileID: 7395787065522925183}
   - component: {fileID: 7395787065522925176}
   - component: {fileID: 7395787065522925179}
-  - component: {fileID: 7395787065522925172}
   - component: {fileID: -8757322530359168188}
   - component: {fileID: -5085522883632160910}
   - component: {fileID: -5125962494308505482}
   - component: {fileID: 471710236521865869}
-  - component: {fileID: -38006640488458647}
   - component: {fileID: 8275506337833959699}
+  - component: {fileID: -6124283958928851687}
+  - component: {fileID: -4725805423226357953}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1841,27 +1841,6 @@ MonoBehaviour:
   onCastSfx: {fileID: 0}
   paramName: forward
   speed: 10
---- !u!114 &7395787065522925172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4753723325571400412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11e22cd3091c03e46b9f7c951ca88bed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 2
-  key: 101
-  isready: 1
-  onCastSfx: {fileID: 0}
-  paramName: 
-  amount: 2
-  rate: 0.5
-  healMaxTimes: 5
-  type: 2
 --- !u!82 &-8757322530359168188
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2004,18 +1983,6 @@ MonoBehaviour:
   paramName: 
   ammunitionIndex: 1
   RateOfFire: 1.5
---- !u!114 &-38006640488458647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4753723325571400412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9950c68b29dcfe244ac196e60310eadd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8275506337833959699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2034,6 +2001,45 @@ MonoBehaviour:
   onCastSfx: {fileID: 0}
   paramName: backward
   speed: -10
+--- !u!114 &-6124283958928851687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4753723325571400412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e22cd3091c03e46b9f7c951ca88bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  key: 0
+  isready: 1
+  onCastSfx: {fileID: 0}
+  paramName: 
+  amount: 4
+  rate: 5
+--- !u!114 &-4725805423226357953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4753723325571400412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af98b8a7d7fdd341b1252b2363224b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 7
+  key: 98
+  isready: 1
+  onCastSfx: {fileID: 0}
+  paramName: 
+  shield: {fileID: 4574566107289371406, guid: 7a6bff886ab790143994b8f935479689, type: 3}
+  shieldLife: 100
+  duration: 5
 --- !u!1 &4753723325571400414
 GameObject:
   m_ObjectHideFlags: 0
@@ -3330,7 +3336,7 @@ RectTransform:
   m_GameObject: {fileID: 8213696474441027940}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 413628927454934193}
