@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour
     public allowedTarget allowedTarget;
     public bool OnImpactDestroy;
     public AudioClip onDestroySfx;
+    public ParticleSystem onDestroyVfx;
 
     Game3.GameManager manager;
 
@@ -37,8 +38,10 @@ public class Projectile : MonoBehaviour
     {
         if (OnImpactDestroy)
         {
-            Destroy(gameObject);
             playSfx(onDestroySfx);
+            if(onDestroyVfx!=null)
+                Instantiate(onDestroyVfx, transform.position, onDestroyVfx.transform.rotation).Play();
+            Destroy(gameObject);
         }
     }
     protected virtual void OnTriggerEnter(Collider collider)

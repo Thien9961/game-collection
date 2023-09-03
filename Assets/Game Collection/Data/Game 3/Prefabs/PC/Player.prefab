@@ -1675,12 +1675,10 @@ GameObject:
   - component: {fileID: 7395787065522925176}
   - component: {fileID: 7395787065522925179}
   - component: {fileID: -8757322530359168188}
-  - component: {fileID: -5085522883632160910}
   - component: {fileID: -5125962494308505482}
   - component: {fileID: 471710236521865869}
   - component: {fileID: 8275506337833959699}
-  - component: {fileID: -6124283958928851687}
-  - component: {fileID: -4725805423226357953}
+  - component: {fileID: 58253118334192510}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1780,7 +1778,7 @@ MonoBehaviour:
   animator: {fileID: 4753723326506131833}
   onDeathSfx: {fileID: 0}
   onHurtSfx: {fileID: 0}
-  atk: 2
+  atk: 0
 --- !u!114 &7395787065522925183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1793,10 +1791,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ced47ee2a88644394353af1ae48dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 1
+  cooldown: 0.2
   key: 323
   isready: 1
-  onCastSfx: {fileID: 0}
+  onCastSfx: {fileID: 8300000, guid: 4d6d816408e48e7428e863203522508f, type: 3}
   paramName: attacking
   damage: 0
   launchforce: 0
@@ -1840,7 +1838,7 @@ MonoBehaviour:
   isready: 1
   onCastSfx: {fileID: 0}
   paramName: forward
-  speed: 10
+  speed: 5
 --- !u!82 &-8757322530359168188
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1861,7 +1859,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 100
   DopplerLevel: 1
-  MinDistance: 10
+  MinDistance: 100
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -1937,14 +1935,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!81 &-5085522883632160910
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4753723325571400412}
-  m_Enabled: 1
 --- !u!114 &-5125962494308505482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1963,7 +1953,7 @@ MonoBehaviour:
   onCastSfx: {fileID: 0}
   paramName: 
   ammunitionIndex: 0
-  RateOfFire: 0.5
+  RateOfFire: 0.2
 --- !u!114 &471710236521865869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1977,7 +1967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  key: 119
+  key: 101
   isready: 1
   onCastSfx: {fileID: 0}
   paramName: 
@@ -2000,8 +1990,8 @@ MonoBehaviour:
   isready: 1
   onCastSfx: {fileID: 0}
   paramName: backward
-  speed: -10
---- !u!114 &-6124283958928851687
+  speed: -5
+--- !u!114 &58253118334192510
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2010,36 +2000,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4753723325571400412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11e22cd3091c03e46b9f7c951ca88bed, type: 3}
+  m_Script: {fileID: 11500000, guid: 31fda50e2e3b70c419d4be85540c2e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
-  key: 0
+  cooldown: 3
+  key: 304
   isready: 1
-  onCastSfx: {fileID: 0}
+  onCastSfx: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
   paramName: 
-  amount: 4
-  rate: 5
---- !u!114 &-4725805423226357953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4753723325571400412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4af98b8a7d7fdd341b1252b2363224b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 7
-  key: 98
-  isready: 1
-  onCastSfx: {fileID: 0}
-  paramName: 
-  shield: {fileID: 4574566107289371406, guid: 7a6bff886ab790143994b8f935479689, type: 3}
-  shieldLife: 100
-  duration: 5
+  delay: 0.3
+  destination: {x: 0, y: 0, z: 7}
+  Vfx: {fileID: 2073581062997024212, guid: a4fb039541848534b9baf0f79de0b6db, type: 3}
 --- !u!1 &4753723325571400414
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,7 @@ public class Enemy : Lifeform
     }
     protected override void death()
     {
+        playSfx(onDeathSfx);
         animator.SetBool("alive", false);
         Destroy(gameObject, 2.0f);
     }
@@ -33,5 +34,7 @@ public class Enemy : Lifeform
     {
         if (manager.isplaying && hp.value>0)
             controller.control();
+        GameObject p = GameObject.Find("Player(Clone)")??GameObject.Find("Game Manager");
+        Debug.DrawLine(transform.position, p.transform.position, Color.red);
     }
 }

@@ -236,9 +236,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 250
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1321,7 +1321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Faction: 1
-  maxhp: 100
+  maxhp: 250
   hp: {fileID: 2014662905699837628}
   rb: {fileID: 8159926493981443430}
   state: 0
@@ -1346,7 +1346,7 @@ MonoBehaviour:
   cooldown: 3
   key: 0
   isready: 1
-  onCastSfx: {fileID: 0}
+  onCastSfx: {fileID: 8300000, guid: 013cade833bd5334181943ed41c2e51d, type: 3}
   paramName: attacking
   damage: 2
   launchforce: 0
@@ -1405,7 +1405,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 100
   DopplerLevel: 1
-  MinDistance: 10
+  MinDistance: 100
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -1441,7 +1441,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

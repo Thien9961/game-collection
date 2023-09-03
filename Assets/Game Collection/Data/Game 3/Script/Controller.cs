@@ -17,7 +17,7 @@ public class Controller : MonoBehaviour
     public float attackRange;
     private BasicAttack basicattack;
     private Movement[] movement;
-    private Guard guard;
+    Collider hitbox;
 
     public allowedTarget attackTarget;
 
@@ -94,7 +94,7 @@ public class Controller : MonoBehaviour
         RaycastHit hitGnd, hitTarget;
         bool detectTarget;
         Vector3 origin = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        bool detectGnd = Physics.Raycast(new Ray(origin, Vector3.down), out hitGnd, 1);
+        bool detectGnd = Physics.Raycast(new Ray(origin, Vector3.down), out hitGnd, 1.5f*hitbox.bounds.extents.y);
         UnityEngine.Debug.DrawRay(origin, Vector3.down, Color.green);
         detectTarget = Physics.Raycast(new Ray(transform.position, transform.forward), out hitTarget, attackRange, (int)faction.WARRIOR);
         if (detectTarget)
@@ -115,19 +115,12 @@ public class Controller : MonoBehaviour
             move(Signal.NONE);
         
     }
-    IEnumerator TriggerPassive(Ability ability,float delay)
-    {
-        yield return delay;
-        bool b = false;
-        GetComponent<Guard>()?.waitforinput(Guard.ON, ref b);
-    }
     void Start()
     {
-        
+        hitbox=GetComponent<Collider>();
         basicattack = GetComponent<BasicAttack>();
         movement = GetComponents<Movement>();
         basicattack.damage += GetComponent<Enemy>().atk;
-        StartCoroutine(TriggerPassive(guard, 0.1f));
     }
 
     // Update is called once per frame

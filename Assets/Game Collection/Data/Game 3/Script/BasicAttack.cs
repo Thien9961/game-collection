@@ -14,6 +14,7 @@ public class BasicAttack : Ability
 
     public override void start()
     {
+        base.start();
         Vector3 v = new Vector3(transform.position.x, projectile[projectileIndex].transform.position.y+transform.position.y, transform.position.z);
         GameObject p = Instantiate(projectile[projectileIndex], v,transform.rotation);
         Projectile projectileScript=p.GetComponent<Projectile>();

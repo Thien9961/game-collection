@@ -26,8 +26,7 @@ public class EnergyBall : Projectile
                             Debug.Log(collider.name + " was hit by" + gameObject.name);
                             victim.takedamage(gameObject, damage, Vector3.zero);
                             victim.rb.AddForce(transform.forward.normalized * impactForce, ForceMode.Impulse);
-                            if (OnImpactDestroy)
-                                Destroy(gameObject);
+                            death();
                         }
                         break;
                     }
@@ -38,8 +37,7 @@ public class EnergyBall : Projectile
                             Debug.Log(collider.name + " was hit by" + gameObject.name);
                             victim.takedamage(gameObject, damage, Vector3.zero);
                             victim.rb.AddForce(transform.forward.normalized * impactForce, ForceMode.Impulse);
-                            if (OnImpactDestroy)
-                                Destroy(gameObject);
+                            death();
                         }
                         break;
                     }
@@ -50,8 +48,7 @@ public class EnergyBall : Projectile
                             victim.takedamage(gameObject, damage, Vector3.zero);
                             victim.rb.AddForce(transform.forward.normalized * impactForce, ForceMode.Impulse);
                             Debug.Log(collider.name + " was hit by" + gameObject.name);
-                            if (OnImpactDestroy)
-                                Destroy(gameObject);
+                            death();
                         }
                         break;
                     }

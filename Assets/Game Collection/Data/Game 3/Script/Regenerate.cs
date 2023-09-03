@@ -5,6 +5,7 @@ using UnityEngine;
 public class Regenerate : Ability
 {
     public float amount,rate;
+    public ParticleSystem vfx;
     // Start is called before the first frame update
     void regen()
     {
@@ -17,5 +18,7 @@ public class Regenerate : Ability
     void Start()
     {
         InvokeRepeating(nameof(regen), 0,rate);
+        if(vfx != null)
+            Instantiate(vfx,transform.position,vfx.transform.rotation).transform.parent=transform;
     }
 }

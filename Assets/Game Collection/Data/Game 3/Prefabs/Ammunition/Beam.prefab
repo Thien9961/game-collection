@@ -145,13 +145,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Faction: 0
-  damage: 10
+  damage: 90
   rb: {fileID: 2126157011757396151}
   allowedTarget: 0
   OnImpactDestroy: 0
   onDestroySfx: {fileID: 0}
-  onHitSfx: {fileID: 0}
-  speed: 30
+  onDestroyVfx: {fileID: 0}
+  speed: 50
   impactForce: 0
 --- !u!54 &2126157011757396151
 Rigidbody:

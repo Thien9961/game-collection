@@ -10,7 +10,7 @@ public class Character : Lifeform
     private Movement[] movement;
     private Jump jump;
     private Switch[] wpn;
-    private Guard guard;
+    private Tele teleport;
 
     // Start is called before the first frame update
 
@@ -22,12 +22,13 @@ public class Character : Lifeform
         movement = GetComponents<Movement>();
         jump = GetComponent<Jump>();
         wpn=GetComponents<Switch>();
-        guard = GetComponent<Guard>();
+        teleport = GetComponent<Tele>();
         basicattack.damage += atk;
     }
 
     protected override void death()
-    { 
+    {
+        playSfx(onDeathSfx);
         animator.SetBool("alive", false);
         manager.isplaying = false;
         manager.menuRestart.SetActive(true);
@@ -38,10 +39,10 @@ public class Character : Lifeform
         base.Update();
         if(manager.isplaying)
         {
-            bool atkCnd = false, moveCnd = false, jumpCnd = false, wpnCnd = false, guardCnd=false;
+            bool atkCnd = false, moveCnd = false, jumpCnd = false, wpnCnd = false, teleCnd=false;
             basicattack.waitforinput(BasicAttack.HOLD,ref atkCnd);
             jump.waitforinput(Jump.PRESS, ref jumpCnd);
-            guard.waitforinput(Guard.PRESS, ref guardCnd);
+            teleport.waitforinput(Tele.PRESS, ref teleCnd);
             foreach (Ability a in wpn)
                 a.waitforinput(Ability.PRESS, ref wpnCnd );
             foreach (Ability m in movement)

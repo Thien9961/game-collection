@@ -29,7 +29,7 @@ public class Movement : Ability
 
     public override void start()
     {
-        
+        base.start();
         if (lfScript.state==Lifeform.STATE_NORMAL)
         {
             if(speed>0)

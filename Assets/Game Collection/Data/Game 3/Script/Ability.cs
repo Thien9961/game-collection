@@ -73,7 +73,6 @@ using static UnityEngine.Rendering.DebugUI;
     }
     public virtual void start()
     {
-        Debug.Log("Ability start");
         if(onCastSfx != null)
             GetComponent<AudioSource>().PlayOneShot(onCastSfx);
     }

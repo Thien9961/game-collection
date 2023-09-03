@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Faction: 2
-  damage: 8
+  damage: 0
   rb: {fileID: 0}
   allowedTarget: 0
   OnImpactDestroy: 0
   onDestroySfx: {fileID: 0}
-  onHitSfx: {fileID: 0}
+  onDestroyVfx: {fileID: 0}
   impactforce: {x: 0, y: 0, z: 0}
   maxDistance: 100
 --- !u!82 &-2601823027354913267

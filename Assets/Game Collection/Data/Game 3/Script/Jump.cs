@@ -27,6 +27,7 @@ public class Jump : Ability
     }
     public override void start() 
     {
+        base.start();
         if (lfScript.state==Lifeform.STATE_NORMAL && grounded)
             if (grounded && lfScript.state==Lifeform.STATE_NORMAL)
                 lfScript.rb.AddForce(Vector3.up* jumforce, ForceMode.Impulse);

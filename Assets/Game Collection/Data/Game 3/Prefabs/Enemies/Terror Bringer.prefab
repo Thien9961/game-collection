@@ -121,7 +121,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 200
+  m_MaxValue: 1000
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -2803,8 +2803,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.6138768, y: 4.8013554, z: 5.6785994}
-  m_Center: {x: -0.010476589, y: 2.416297, z: -0.42526054}
+  m_Size: {x: 3.6138768, y: 4.8443165, z: 5.6785994}
+  m_Center: {x: -0.010476589, y: 2.3948164, z: -0.42526054}
 --- !u!82 &8158309434211919123
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2823,9 +2823,9 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 100
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 100
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -2861,7 +2861,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2914,15 +2914,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Faction: 64
-  maxhp: 200
+  maxhp: 1000
   hp: {fileID: 8407167541123933506}
   rb: {fileID: 6378022043157889883}
   state: 0
   animator: {fileID: 3971875539892915006}
-  onDeathSfx: {fileID: 0}
+  onDeathSfx: {fileID: 8300000, guid: 4286e0f3bc57be8469430eb1eb7e10c4, type: 3}
   onHurtSfx: {fileID: 0}
-  atk: 0
-  diffPts: 4
+  atk: 30
+  diffPts: 5
   wave: 0
 --- !u!114 &4637052710170081338
 MonoBehaviour:
@@ -2950,12 +2950,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ced47ee2a88644394353af1ae48dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 1
+  cooldown: 2
   key: 0
   isready: 1
-  onCastSfx: {fileID: 0}
+  onCastSfx: {fileID: 8300000, guid: 180f35aef2ea2654086bcbb52d58ec0b, type: 3}
   paramName: attacking
-  damage: 5
+  damage: 0
   launchforce: 0
   projectile:
   - {fileID: 5413578204975797340, guid: bb0e4cb47a1095f48b7b1bb78f1aebe1, type: 3}
@@ -2995,8 +2995,9 @@ MonoBehaviour:
   isready: 1
   onCastSfx: {fileID: 0}
   paramName: 
-  amount: 3
-  rate: 1
+  amount: 5
+  rate: 0.5
+  vfx: {fileID: 6211125795773073634, guid: 12a56ee4630040c4eb17ae9707ed4cef, type: 3}
 --- !u!114 &1676567787770197081
 MonoBehaviour:
   m_ObjectHideFlags: 0
