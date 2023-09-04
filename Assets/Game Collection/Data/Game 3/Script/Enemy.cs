@@ -33,8 +33,6 @@ public class Enemy : Lifeform
     private void FixedUpdate()
     {
         if (manager.isplaying && hp.value>0)
-            controller.control();
-        GameObject p = GameObject.Find("Player(Clone)")??GameObject.Find("Game Manager");
-        Debug.DrawLine(transform.position, p.transform.position, Color.red);
+            controller.control();   
     }
 }
