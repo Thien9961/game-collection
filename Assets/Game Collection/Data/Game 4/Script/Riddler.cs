@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.HighDefinition;
-using UnityEditorInternal;
 
 public class Riddler : MonoBehaviour
 {
@@ -85,7 +84,7 @@ public class Riddler : MonoBehaviour
         if (observeMenu.activeSelf)
         {
              time -= Time.deltaTime;
-            observeMenu.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Time: " + time.ToString("0.##"));
+            observeMenu.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Time: " + time.ToString("0.##")+"s");
         }
             
     }

@@ -41,6 +41,11 @@ namespace Game2
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);           
         }
+
+        public void Exit()
+        {
+            SceneManager.LoadScene(0);
+        }
         void Start()
         {
             isplaying = true;
@@ -54,6 +59,7 @@ namespace Game2
             player.GetComponent<Player>().gmScript=GetComponent<Game2.GameManager>();
             player.GetComponent<Player>().SetWpn(Weapons[DefaulWpnIndex]);
             GameObject.Find("Camera").transform.parent= player.transform;
+            RenderSettings.ambientIntensity = 1.25f;
         }
         void hud_update()
         {

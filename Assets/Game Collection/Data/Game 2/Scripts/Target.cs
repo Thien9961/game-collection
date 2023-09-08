@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game2;
-using static UnityEditor.Searcher.Searcher.AnalyticsEvent;
 
 public class Target : MonoBehaviour
 {

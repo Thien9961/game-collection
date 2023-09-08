@@ -24,7 +24,6 @@ public class Wpn : MonoBehaviour
         yield return new WaitForSeconds(sec);
         isready = true;
         transform.parent.GetComponent<Animator>().SetBool("attacking", false);
-        transform.parent.GetComponent<Animator>().ResetTrigger("trigger");
     }
 
     IEnumerator reloading(float sec)
@@ -55,16 +54,10 @@ public class Wpn : MonoBehaviour
             p.Play(false);
             StartCoroutine(firing(cooldown));
             Instantiate(ammunition, muzzle, ammunition.transform.rotation).GetComponent<Rigidbody>().AddForce(transform.parent.forward * launchForce, ForceMode.Impulse);
-            if (!transform.parent.GetComponent<Game2.Player>().GetWpn().fullauto)
-                transform.parent.GetComponent<Animator>().SetBool("attacking", true);
-            else
-                transform.parent.GetComponent<Animator>().SetTrigger("trigger");
+            transform.parent.GetComponent<Animator>().SetBool("attacking", true);
         }
     }
-    void resettrigger()
-    {
-        
-    }
+
     void wpn_reload()
     {
         if (isready)
