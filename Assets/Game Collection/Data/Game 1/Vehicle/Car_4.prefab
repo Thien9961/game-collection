@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 4230008880166841191}
   - component: {fileID: 2490804227446170580}
   - component: {fileID: 7476995261702167711}
-  - component: {fileID: -8166450940833205141}
+  - component: {fileID: -4636152258478812337}
   m_Layer: 0
   m_Name: Car_4
   m_TagString: Untagged
@@ -497,7 +497,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-8166450940833205141
+--- !u!114 &-4636152258478812337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -509,9 +509,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685ff9f116c248e48805f696fa7a4a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 200
+  speedX: 0.25
   inputs: 6100000064000000
-  controlable: 0
+  controlable: 1
   state: 2
 --- !u!1 &5397409475630888034
 GameObject:

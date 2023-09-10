@@ -5,27 +5,25 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
-using Unity.VisualScripting;
-using System.Net.Sockets;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> vehicle;
-    public int score;
     public bool isplaying;
+    public int score=0;
     public GameObject restartmenu,enviroment;
     public static GameObject player; 
-    public TextMeshProUGUI scoretxt;
+    public TextMeshProUGUI scoretxt,speedmeter;
 
-    public void pausegame()
+    public void PauseGame()
     {
         if (isplaying)
             isplaying = false;
         else
             isplaying= true;
     }
-    public void restart()
+    public void RestartGame()
     {
         SceneManager.LoadScene(1);
     }
@@ -53,20 +51,57 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void LoadMain()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void GameOver()
+    {
+        Env.speedZ = 0;
+        restartmenu.SetActive(true);
+        isplaying = false;
+    }
+
+    void UpdateScore(bool update)
+    {
+        if(SceneManager.GetActiveScene().buildIndex==1) 
+            if(update)
+            {
+                score++;
+                scoretxt.SetText("Score: " + score);
+            }
+    }
+
     private void Start()
     {
-        isplaying = true;
-        Road.SetVehicle(vehicle);
-        int index = Random.Range(0, vehicle.Count);
-        player=Instantiate(vehicle[index], vehicle[index].transform.position, vehicle[index].transform.rotation);
-        Instantiate(enviroment);
-        
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            Env.speedZ = 200;
+            isplaying = true;
+            Road.SetVehicle(vehicle);
+            int index = Random.Range(0, vehicle.Count);
+            player = Instantiate(vehicle[index], vehicle[index].transform.position, vehicle[index].transform.rotation);
+            player.GetComponent<Vehicle>().controlable = true;
+            GameObject env = Instantiate(enviroment);
+            foreach (Transform t in env.transform)
+                if (t.GetComponent<Spawner>() != null)
+                    Destroy(t.gameObject);
+        }
     }
     private void Update()
     {
-        player.GetComponent<Vehicle>().controlable = true;
-        score += (int)Time.deltaTime;
-        scoretxt.SetText("Score: " + score);
-        Env.speedZ += Time.deltaTime * 10;
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            
+            UpdateScore(isplaying);
+            speedmeter.SetText(Mathf.RoundToInt(Env.speedZ / 10) + "km/h");
+            if (player.GetComponent<Vehicle>().controlable == false)
+                GameOver();
+            if (Env.speedZ < Env.speedMax)
+            {
+                Env.speedZ += Time.deltaTime * 10;
+            }
+        }  
     }
 }

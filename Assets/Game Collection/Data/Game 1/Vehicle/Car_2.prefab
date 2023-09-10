@@ -361,9 +361,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685ff9f116c248e48805f696fa7a4a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 200
+  speedX: 0.25
   inputs: 6100000064000000
-  controlable: 0
+  controlable: 1
   state: 2
 --- !u!1 &1664593040851034
 GameObject:
